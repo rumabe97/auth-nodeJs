@@ -3,6 +3,8 @@ const app = express();
 const admin = require("firebase-admin/app");
 const credentials = require("../serviceAccountKey.json");
 const {getAuth} = require("firebase-admin/auth");
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('../swagger.json');
 
 admin.initializeApp({
     credential: admin.cert(credentials),
@@ -11,6 +13,7 @@ admin.initializeApp({
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
