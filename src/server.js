@@ -8,7 +8,7 @@ const auth = express();
 const port = 5000;
 
 // require routes from the routes.js file
-// const routes = require("./api/routes");
+const routes = require("./api/routes");
 // set the route for our application by passing the app to the routes object
 routes(auth);
 
