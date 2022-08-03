@@ -1,18 +1,35 @@
-// require express
 const express = require("express");
+const app = express();
+const admin = require("firebase-admin/app");
+const credentials = require("../serviceAccountKey.json");
+const {getAuth} = require("firebase-admin/auth");
 
-//create an app using express constructor
-const auth = express();
+admin.initializeApp({
+    credential: admin.cert(credentials),
+    projectId: 'auth-twenti',
+})
 
-// declare your port
-const port = 5000;
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
 
-// require routes from the routes.js file
-const routes = require("./api/routes");
-// set the route for our application by passing the app to the routes object
-routes(auth);
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, () => {
+    console.log(`Server is running on PORT ${PORT}`)
+})
 
-// call the listen method on the app
-auth.listen(port, ()=>{
-    console.log("Server is running is port: " + port);
-});
+app.post('/signup', async (req, res) => {
+    const user = {
+        email: req.body.email,
+        password: req.body.password
+    }
+    getAuth()
+        .createUser(user)
+        .then((userRecord) => {
+            // See the UserRecord reference doc for the contents of userRecord.
+            res.json(userRecord);
+        })
+        .catch((error) => {
+            console.log('Error creating new user:', error);
+        });
+
+})
