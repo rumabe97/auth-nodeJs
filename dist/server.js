@@ -41,12 +41,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var express_1 = __importDefault(require("express"));
-var app = express_1.default();
-var PORT = 3000;
-app.get('/', function (req, res) {
+const express_1 = __importDefault(require("express"));
+const app = express_1.default();
+const PORT = 3000;
+app.get('/', (req, res) => {
     res.send('The sedulous hyena ate the antelope!');
 });
-app.listen(PORT, function () {
-    console.log("Server is running on PORT " + PORT);
+app.listen(PORT, () => {
+    console.log(`Server is running on PORT ${PORT}`);
 });
+//# sourceMappingURL=server.js.map
