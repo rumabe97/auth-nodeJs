@@ -2,25 +2,71 @@
   "swagger": "2.0",
   "info": {
     "version": "1.0.0",
-    "title": "My User Project CRUD",
-    "description": "My User Project Application API",
+    "title": "Twenti auth swagger",
+    "description": "Swagger for twenti auth microservice",
     "license": {
       "name": "MIT",
       "url": "https://opensource.org/licenses/MIT"
     }
   },
-  "host": "localhost:8000",
-  "basePath": "/",
+  "host": "localhost:8080",
+  "basePath": "/api/v0/auth",
   "tags": [
     {
-      "name": "Users",
-      "description": "API for users in the system"
+      "name": "Firebase",
+      "description": "Firebase authentication endpoints"
     }
   ],
-  "schemes": ["http"],
-  "consumes": ["application/json"],
-  "produces": ["application/json"],
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "paths": {
-
+    "/signup": {
+      "post": {
+        "tags": [
+          "Firebase"
+        ],
+        "summary": "Signup with firebase",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Signup body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "$ref": "#definitions/signup"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ok"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "signup": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    }
   }
 }
