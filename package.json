@@ -2,10 +2,10 @@
   "name": "auth-nodejs",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/server.js",
+  "main": "dist/src/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "tsc && node dist/server.js"
+    "start": "tsc && node dist/src/server.js"
   },
   "repository": {
     "type": "git",

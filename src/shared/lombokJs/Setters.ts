@@ -1,6 +1,6 @@
 import {capitalize} from "../stringUtils/Capitalize";
 
-const Setters = () => <T extends { new(...args: any[]): {} }>(constructor: T) => {
+export const Setters = () => <T extends { new(...args: any[]): {} }>(constructor: T) => {
     return class extends constructor {
         constructor(...args: any[]) {
             super(...args);
