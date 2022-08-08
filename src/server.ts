@@ -10,7 +10,7 @@ app.use(express.urlencoded({extended: true}));
 app.use(bodyParser.urlencoded({extended: false, limit: '50mb'}));
 app.use(bodyParser.json({limit: '50mb'}));
 
-const PORT = 8080;
+const PORT = 3000;
 app.use('/api/v0/auth', firebaseRoutes);
 app.use('/api/v0/auth', swaggerUi.serve, swaggerUi.setup(swagger, null, null, null));
 app.use("*", (req, res) => {

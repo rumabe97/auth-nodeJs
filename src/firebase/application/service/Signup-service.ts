@@ -13,7 +13,7 @@ export class SignupService implements SignupPort {
                 return userRecord;
             })
             .catch((error) => {
-                return 'Error creating new user:' + error;
+                return  {err:{code: 400, message: error}}
             });
     }
 

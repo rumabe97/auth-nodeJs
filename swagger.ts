@@ -1,5 +1,6 @@
 import {SignupInputDto} from "./src/firebase/adapter/in/dtos/SignupInputDto";
 import {toDefinition} from "./src/shared/stringUtils/ToDefinition";
+import {SignupOutputDto} from "./src/firebase/adapter/out/dtos/SignupOutputDto";
 
 export const swagger = {
     "swagger": "2.0",
@@ -12,7 +13,7 @@ export const swagger = {
             "url": "https://opensource.org/licenses/MIT"
         }
     },
-    "host": "localhost:8080",
+    "host": "localhost:3000",
     "basePath": "/api/v0/auth",
     "tags": [
         {
@@ -47,22 +48,29 @@ export const swagger = {
                         "required": true,
                         "schema": {
                             "type": "object",
-                            "$ref": "#definitions/signup"
+                            "$ref": "#definitions/signupInputDTO"
                         }
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "ok"
+                        "description": "ok",
+                        "schema": {
+                            "$ref": "#definitions/signupOutputDTO"
+                        }
                     }
                 }
             }
         }
     },
     "definitions": {
-        "signup": {
+        "signupInputDTO": {
             "type": "object",
             "properties": toDefinition(new SignupInputDto())
+        },
+        "signupOutputDTO": {
+            "type": "object",
+            "properties": toDefinition(new SignupOutputDto())
         }
     }
 }
