@@ -19,14 +19,13 @@ export class SignupOutputDto {
     private metadata: Metadata = new Metadata();
     private tokensValidAfterTime: Date = new Date();
     private providerData: ProviderData[] = [new ProviderData()];
-    private test:Date = new Date();
 
     constructor(value?: any) {
         const props = Reflect.ownKeys(this);
         if (!value) return;
         props.forEach(p => {
-            if (this.hasOwnProperty(p)) return;
-            if (value[p]) this[`set${capitalize(p as string)}`](value[p])
+            if (!this.hasOwnProperty(p)) return;
+            if (value[p]) this[p] = value[p];
         })
     }
 }

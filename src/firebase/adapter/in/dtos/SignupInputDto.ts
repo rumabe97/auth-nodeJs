@@ -1,6 +1,5 @@
 import {Getters} from "../../../../shared/lombokJs/Getters";
 import {Setters} from "../../../../shared/lombokJs/Setters";
-import {capitalize} from "../../../../shared/stringUtils/Capitalize";
 
 @Getters()
 @Setters()
@@ -17,8 +16,8 @@ export class SignupInputDto {
         const props = Reflect.ownKeys(this);
         if (!value) return;
         props.forEach(p => {
-            if (this.hasOwnProperty(p)) return;
-            if (value[p]) this[`set${capitalize(p as string)}`](value[p])
+            if (!this.hasOwnProperty(p)) return;
+            if (value[p]) this[p] = value[p];
         })
     }
 }

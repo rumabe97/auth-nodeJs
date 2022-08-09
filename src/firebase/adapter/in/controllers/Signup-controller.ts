@@ -1,4 +1,5 @@
 import {SignupService} from "../../../application/service/Signup-service";
+import {SignupInputDto} from "../dtos/SignupInputDto";
 
 export class SignupController {
     private signupService: SignupService;
@@ -7,7 +8,7 @@ export class SignupController {
         this.signupService = new SignupService();
     }
 
-    public signup(user: any): any {
+    public signup(user: SignupInputDto): any {
         return this.signupService.signup(user);
     }
 }

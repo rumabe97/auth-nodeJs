@@ -11,5 +11,4 @@ export class ProviderData {
     private phoneNumber: string = '';
     private displayName: string = '';
     private photoURL: string = '';
-
 }

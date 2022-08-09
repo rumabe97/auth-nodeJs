@@ -1,7 +1,8 @@
 import {CYAN_LOG, GREEN_LOG, RED_LOG, YELLOW_LOG} from "../enums/Errors";
 import {clean} from "../objectUtils/Clean";
+import {SharedResponse} from "../SharedResponse";
 
-export const ResponseService = async (status, statusCode, message, data) => {
+export function ResponseService(status, statusCode, message, data): SharedResponse<any> {
     return clean({status: status, code: statusCode, message: message, data: data});
 }
 
