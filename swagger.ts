@@ -1,6 +1,8 @@
 import {SignupInputDto} from "./src/firebase/adapter/in/dtos/SignupInputDto";
 import {toDefinition} from "./src/shared/stringUtils/ToDefinition";
 import {SignupOutputDto} from "./src/firebase/adapter/out/dtos/SignupOutputDto";
+import {LogInInputDto} from "./src/firebase/adapter/in/dtos/LogInInputDto";
+import {LoginOutputDto} from "./src/firebase/adapter/out/dtos/LoginOutputDto";
 
 export const swagger = {
     "swagger": "2.0",
@@ -61,6 +63,37 @@ export const swagger = {
                     }
                 }
             }
+        },
+        "/login": {
+            "post": {
+                "tags": [
+                    "Firebase"
+                ],
+                "summary": "Login with firebase",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Signup body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#definitions/loginInputDTO"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "schema": {
+                            "$ref": "#definitions/loginOutputDTO"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
@@ -71,6 +104,14 @@ export const swagger = {
         "signupOutputDTO": {
             "type": "object",
             "properties": toDefinition(new SignupOutputDto())
+        },
+        "loginInputDTO": {
+            "type": "object",
+            "properties": toDefinition(new LogInInputDto())
+        },
+        "loginOutputDTO": {
+            "type": "object",
+            "properties": toDefinition(new LoginOutputDto())
         }
     }
 }
