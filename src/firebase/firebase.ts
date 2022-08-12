@@ -3,6 +3,7 @@ import {SignupController} from "./adapter/in/controllers/Signup-controller";
 import {initializeApp, cert} from 'firebase-admin/app';
 import {initializeApp as f} from 'firebase/app'
 import {LoginController} from "./adapter/in/controllers/login-controller";
+import {GetUserController} from "./adapter/in/controllers/getUser-controller";
 
 const GOOGLE_APPLICATION_CREDENTIALS = '/home/ruben/Escritorio/githubProyects/auth-nodeJs/serviceAccountKey.json';
 
@@ -19,7 +20,9 @@ f({
 const router = express.Router();
 const signupController = new SignupController();
 const loginControlelr = new LoginController();
+const getUserController = new GetUserController();
 
-router.use("/signup", signupController.signup())
-router.use("/login", loginControlelr.logIn())
+router.use("/signup", signupController.signup());
+router.use("/login", loginControlelr.logIn());
+router.use("/getUser", getUserController.getUserByUid())
 export const firebaseRoutes = router;

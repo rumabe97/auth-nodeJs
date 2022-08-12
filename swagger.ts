@@ -24,7 +24,8 @@ export const swagger = {
         }
     ],
     "schemes": [
-        "http"
+        "http",
+        "https"
     ],
     "consumes": [
         "application/json"
@@ -94,6 +95,39 @@ export const swagger = {
                     }
                 }
             }
+        },
+        "/getUser/{uid}": {
+            "get": {
+                "tags": [
+                    "Firebase"
+                ],
+                "summary": "Get user by uid",
+                "produces": [
+                    "application/json"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "uid",
+                        "in": "path",
+                        "description": "User uid",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "schema": {
+                            "$ref": "#definitions/signupOutputDTO"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
@@ -113,5 +147,22 @@ export const swagger = {
             "type": "object",
             "properties": toDefinition(new LoginOutputDto())
         }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+            }
+        }
+    },
+    "securityDefinitions": {
+        "bearerAuth": {
+            "type": 'apiKey',
+            "name": 'Authorization',
+            "scheme": 'bearer',
+            "in": 'header',
+        },
     }
 }
