@@ -161,6 +161,39 @@ export const swagger = {
                     }
                 }
             }
+        },
+        "/getUser/byPhoneNumber/{phoneNumber}": {
+            "get": {
+                "tags": [
+                    "Firebase"
+                ],
+                "summary": "Get user by phone number",
+                "produces": [
+                    "application/json"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "phoneNumber",
+                        "in": "path",
+                        "description": "User phone number",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "schema": {
+                            "$ref": "#definitions/signupOutputDTO"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {

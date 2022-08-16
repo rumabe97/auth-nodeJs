@@ -27,4 +27,15 @@ export class GetUserService implements GetUserPort {
                 return {err: {code: 400, message: error}};
             });
     }
+
+    getUserByPhoneNumber(phoneNumber: string) {
+        return getAuth()
+            .getUserByPhoneNumber(phoneNumber)
+            .then((userRecord) => {
+                return userRecord;
+            })
+            .catch((error) => {
+                return {err: {code: 400, message: error}};
+            });
+    }
 }

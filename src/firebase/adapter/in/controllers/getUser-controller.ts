@@ -43,4 +43,18 @@ export class GetUserController {
             return res.status(statusCode).send(resp);
         })
     }
+    public getUserByPhoneNumber(): any {
+        return this.router.get('/byPhoneNumber/:phoneNumber', authenticate, async (req, res) => {
+            let status = 'Success Request', statusCode = CODE_OK, message = '';
+            const data: any = await this.getUserService.getUserByPhoneNumber(req.params.phoneNumber);
+
+            if (data.err) {
+                statusCode = data.err.code;
+                message = data.err.message;
+                status = 'Failure Request'
+            }
+            const resp = statusCode === CODE_OK ? new SignupOutputDto(data) : ResponseService(status, statusCode, message, data.err ? null : data);
+            return res.status(statusCode).send(resp);
+        })
+    }
 }

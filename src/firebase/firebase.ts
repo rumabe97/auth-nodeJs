@@ -24,6 +24,7 @@ const getUserController = new GetUserController();
 
 router.use("/signup", signupController.signup());
 router.use("/login", loginControlelr.logIn());
-router.use("/getUser", getUserController.getUserByUid())
-router.use("/getUser", getUserController.getUserByEmail())
+router.use("/getUser", getUserController.getUserByUid());
+router.use("/getUser", getUserController.getUserByEmail());
+router.use("/getUser", getUserController.getUserByPhoneNumber());
 export const firebaseRoutes = router;
