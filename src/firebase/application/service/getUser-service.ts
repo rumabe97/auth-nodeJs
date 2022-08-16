@@ -6,9 +6,9 @@ export class GetUserService implements GetUserPort {
     constructor() {
     }
 
-    signup(user: any) {
+    getUserByUid(uid: string) {
         return getAuth()
-            .createUser(user)
+            .getUser(uid)
             .then((userRecord) => {
                 return userRecord;
             })
@@ -17,9 +17,9 @@ export class GetUserService implements GetUserPort {
             });
     }
 
-    getUserByUid(uid: string) {
+    getUserByEmail(email: string) {
         return getAuth()
-            .getUser(uid)
+            .getUserByEmail(email)
             .then((userRecord) => {
                 return userRecord;
             })

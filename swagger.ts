@@ -128,6 +128,39 @@ export const swagger = {
                     }
                 }
             }
+        },
+        "/getUser/byEmail/{email}": {
+            "get": {
+                "tags": [
+                    "Firebase"
+                ],
+                "summary": "Get user by email",
+                "produces": [
+                    "application/json"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "path",
+                        "description": "User email",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "schema": {
+                            "$ref": "#definitions/signupOutputDTO"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {

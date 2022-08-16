@@ -28,4 +28,19 @@ export class GetUserController {
             return res.status(statusCode).send(resp);
         })
     }
+
+    public getUserByEmail(): any {
+        return this.router.get('/byEmail/:email', authenticate, async (req, res) => {
+            let status = 'Success Request', statusCode = CODE_OK, message = '';
+            const data: any = await this.getUserService.getUserByEmail(req.params.email);
+
+            if (data.err) {
+                statusCode = data.err.code;
+                message = data.err.message;
+                status = 'Failure Request'
+            }
+            const resp = statusCode === CODE_OK ? new SignupOutputDto(data) : ResponseService(status, statusCode, message, data.err ? null : data);
+            return res.status(statusCode).send(resp);
+        })
+    }
 }
