@@ -3,6 +3,7 @@ import {
     signInWithEmailAndPassword
 } from "firebase/auth";
 import {LoginPort} from "../port/Login-port";
+import {CODE_BAD_REQUEST} from "../../../shared/enums/Errors";
 
 export class LoginService implements LoginPort {
 
@@ -18,7 +19,7 @@ export class LoginService implements LoginPort {
                 return resp;
             })
             .catch((error) => {
-                return {err: {code: 400, message: error}}
+                return {err: {code: CODE_BAD_REQUEST, message: error}}
             });
     }
 }

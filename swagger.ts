@@ -194,6 +194,49 @@ export const swagger = {
                     }
                 }
             }
+        },
+        "/updateUser/{uid}": {
+            "put": {
+                "tags": [
+                    "Firebase"
+                ],
+                "summary": "Update user",
+                "produces": [
+                    "application/json"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "uid",
+                        "in": "path",
+                        "description": "User uid",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Update user body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#definitions/signupInputDTO"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "schema": {
+                            "$ref": "#definitions/signupOutputDTO"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {

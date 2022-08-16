@@ -1,7 +1,7 @@
 import express from "express";
 import {CODE_OK} from "../../../../shared/enums/Errors";
 import {ResponseService} from "../../../../shared/errors/ErrorService";
-import {GetUserService} from "../../../application/service/getUser-service";
+import {GetUserService} from "../../../application/service/GetUser-service";
 import {authenticate} from "../../../../shared/middleware/IsAuthenticate";
 import {SignupOutputDto} from "../../out/dtos/SignupOutputDto";
 

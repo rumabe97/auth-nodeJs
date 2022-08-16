@@ -1,5 +1,6 @@
 import {getAuth} from "firebase-admin/auth";
-import {GetUserPort} from "../port/getUser-port";
+import {GetUserPort} from "../port/GetUser-port";
+import {CODE_BAD_REQUEST} from "../../../shared/enums/Errors";
 
 export class GetUserService implements GetUserPort {
 
@@ -13,7 +14,7 @@ export class GetUserService implements GetUserPort {
                 return userRecord;
             })
             .catch((error) => {
-                return {err: {code: 400, message: error}};
+                return {err: {code: CODE_BAD_REQUEST, message: error}};
             });
     }
 
@@ -24,7 +25,7 @@ export class GetUserService implements GetUserPort {
                 return userRecord;
             })
             .catch((error) => {
-                return {err: {code: 400, message: error}};
+                return {err: {code: CODE_BAD_REQUEST, message: error}};
             });
     }
 
@@ -35,7 +36,7 @@ export class GetUserService implements GetUserPort {
                 return userRecord;
             })
             .catch((error) => {
-                return {err: {code: 400, message: error}};
+                return {err: {code: CODE_BAD_REQUEST, message: error}};
             });
     }
 }

@@ -1,15 +1,14 @@
-import {SignupPort} from "../port/Signup-port";
+import {UpdateUserPort} from "../port/UpdateUser-port";
 import {getAuth} from "firebase-admin/auth";
 import {CODE_BAD_REQUEST} from "../../../shared/enums/Errors";
 
-export class SignupService implements SignupPort {
-
+export class UpdateUserService implements UpdateUserPort {
     constructor() {
     }
 
-    signup(user: any) {
+    updateUser(uid, user) {
         return getAuth()
-            .createUser(user)
+            .updateUser(uid, user)
             .then((userRecord) => {
                 return userRecord;
             })
@@ -17,4 +16,5 @@ export class SignupService implements SignupPort {
                 return {err: {code: CODE_BAD_REQUEST, message: error}}
             });
     }
+
 }
