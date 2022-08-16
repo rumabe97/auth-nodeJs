@@ -34,7 +34,7 @@ export const swagger = {
         "application/json"
     ],
     "paths": {
-        "/signup": {
+        "/signUp": {
             "post": {
                 "tags": [
                     "Firebase"
@@ -65,7 +65,7 @@ export const swagger = {
                 }
             }
         },
-        "/login": {
+        "/logIn": {
             "post": {
                 "tags": [
                     "Firebase"
@@ -234,6 +234,36 @@ export const swagger = {
                         "schema": {
                             "$ref": "#definitions/signupOutputDTO"
                         }
+                    }
+                }
+            }
+        },
+        "/deleteUser/{uid}": {
+            "delete": {
+                "tags": [
+                    "Firebase"
+                ],
+                "summary": "Delete user",
+                "produces": [
+                    "application/json"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "uid",
+                        "in": "path",
+                        "description": "User uid",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok"
                     }
                 }
             }
