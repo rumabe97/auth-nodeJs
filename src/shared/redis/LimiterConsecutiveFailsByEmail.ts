@@ -1,7 +1,7 @@
 import Redis from 'ioredis'
 import { RateLimiterRedis } from 'rate-limiter-flexible';
 
-const redisClient = new Redis({ enableOfflineQueue: false });
+const redisClient = new Redis({ enableOfflineQueue: false, host: "redis" });
 
 const maxConsecutiveFailsByUsername = 5;
 

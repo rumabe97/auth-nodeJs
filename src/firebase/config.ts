@@ -1,11 +1,9 @@
-import {initializeApp, cert} from 'firebase-admin/app';
-import {initializeApp as f} from 'firebase/app'
-
-const GOOGLE_APPLICATION_CREDENTIALS = '/home/ruben/Escritorio/githubProyects/auth-nodeJs/serviceAccountKey.json';
+import {initializeApp, applicationDefault} from 'firebase-admin/app';
+import {initializeApp as f} from 'firebase/app';
 
 export function initFirebaseModule(){
     initializeApp({
-        credential: cert(GOOGLE_APPLICATION_CREDENTIALS),
+        credential: applicationDefault(),
         projectId: 'auth-twenti',
     })
 

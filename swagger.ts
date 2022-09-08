@@ -9,13 +9,13 @@ export const swagger = {
     "info": {
         "version": "1.0.0",
         "title": "Twenti auth swagger",
-        "description": "Swagger for twenti auth microservice",
+        "description": "Swagger for twenti auth microservices",
         "license": {
             "name": "MIT",
             "url": "https://opensource.org/licenses/MIT"
         }
     },
-    "host": "localhost:3000",
+    "host": "localhost:8080",
     "basePath": "/api/v0/auth",
     "tags": [
         {
