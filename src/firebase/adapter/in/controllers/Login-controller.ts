@@ -36,14 +36,14 @@ export class LoginController {
                 const retrySecs = Math.round(rlRelSlow.msBeforeNext / 1000) || 1;
                 res.set('Retry-After', String(retrySecs));
                 const resp = ResponseService('Too Many Requests', CODE_TOO_MANY_REQUESTS, 'User is blocked', null);
-                return res.status(statusCode).send(resp);
+                return res.status(CODE_TOO_MANY_REQUESTS).send(resp);
             }
 
             if (rlResEmail?.consumedPoints > maxConsecutiveFailsByEmail || rlRelSlow?.consumedPoints > maxWrongAttemptsByIPperDay) {
                 const retrySecs = Math.round(rlResEmail.msBeforeNext / 1000) || 1;
                 res.set('Retry-After', String(retrySecs));
                 const resp = ResponseService('Too Many Requests', CODE_TOO_MANY_REQUESTS, 'User is blocked', null);
-                return res.status(statusCode).send(resp);
+                return res.status(CODE_TOO_MANY_REQUESTS).send(resp);
             }
 
             const data: any = await this.loginService.login(clean(logInInputDto));
