@@ -1,8 +1,15 @@
 version: '3'
 services:
   redis:
-    image: 'redis'
+    container_name: 'redis'
+    image: redis
+  mongo:
+    container_name: 'mongo'
+    image: mongo
+    ports:
+      - "27017:27017"
   twenti-auth:
+    container_name: 'twenti-auth'
     build: .
     ports:
       - "8080:3000"

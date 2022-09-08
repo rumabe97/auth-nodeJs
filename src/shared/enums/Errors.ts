@@ -1,3 +1,21 @@
+// ERRORS FROM BUSINESS LOGIC
+
+export const ERROR_REQUIRED_FIELD          = "BL2021";
+export const ID_NOT_FOUND                  = "BL2022";
+export const FAIL_CONVERTED_UUID_TO_STRING = "BL2023";
+export const NO_CONTENT                    = "BL2024";
+export const CRASH_LOGIC                   = "BL2025";
+
+//COLORS TO SHOW DETAIL IN LOGS
+export const BLACK_LOG                     = "\x1b[30m%s\x1b[0m";
+export const RED_LOG                       = "\x1b[31m%s\x1b[0m";
+export const GREEN_LOG                     = "\x1b[32m%s\x1b[0m";
+export const YELLOW_LOG                    = "\x1b[33m%s\x1b[0m";
+export const BLUE_LOG                      = "\x1b[34m%s\x1b[0m";
+export const MAGENTA_LOG                   = "\x1b[35m%s\x1b[0m";
+export const CYAN_LOG                      = "\x1b[36m%s\x1b[0m";
+export const WHITE_LOG                     = "\x1b[37m%s\x1b[0m";
+
 // CODE STATUS
 export const CODE_CONTINUE = 100;
 export const CODE_SWITCHING_PROTOCOLS = 101;
