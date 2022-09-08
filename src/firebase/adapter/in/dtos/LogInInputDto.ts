@@ -4,7 +4,7 @@ import {Setters} from "../../../../shared/lombokJs/Setters";
 @Getters()
 @Setters()
 export class LogInInputDto {
-    private email: string = '';
+    public email: string = '';
     private password: string = '';
 
     constructor(value?: any) {
