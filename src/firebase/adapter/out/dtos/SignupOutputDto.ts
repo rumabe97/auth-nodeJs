@@ -18,6 +18,7 @@ export class SignupOutputDto {
     private metadata: Metadata = new Metadata();
     private tokensValidAfterTime: Date = new Date();
     private providerData: ProviderData[] = [new ProviderData()];
+    private user:any = null;
 
     constructor(value?: any) {
         const props = Reflect.ownKeys(this);

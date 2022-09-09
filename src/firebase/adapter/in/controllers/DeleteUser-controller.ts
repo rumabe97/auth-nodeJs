@@ -1,11 +1,11 @@
-import express from "express";
+import express, {Router} from "express";
 import {CODE_OK} from "../../../../shared/enums/Errors";
 import {ResponseService} from "../../../../shared/errors/ErrorService";
 import {DeleteUserService} from "../../../application/service/DeleteUser-service";
 import {isOwner} from "../../../../shared/middleware/IsOwner";
 
 export class DeleteUserController {
-    private router;
+    private router: Router;
     private deleteUserService: DeleteUserService;
 
     constructor() {

@@ -1,4 +1,4 @@
-import express from "express";
+import express, {Router} from "express";
 import {CODE_OK} from "../../../../shared/enums/Errors";
 import {SignupOutputDto} from "../../out/dtos/SignupOutputDto";
 import {ResponseService} from "../../../../shared/errors/ErrorService";
@@ -7,7 +7,7 @@ import {UpdateUserService} from "../../../application/service/UpdateUser-service
 import {isOwner} from "../../../../shared/middleware/IsOwner";
 
 export class UpdateUserController {
-    private router;
+    private router: Router;
     private updateUserService: UpdateUserService;
 
     constructor() {

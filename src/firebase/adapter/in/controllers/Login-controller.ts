@@ -1,4 +1,4 @@
-import express from "express";
+import express, {Router} from "express";
 import {CODE_OK, CODE_TOO_MANY_REQUESTS} from "../../../../shared/enums/Errors";
 import {LogInInputDto} from "../dtos/LogInInputDto";
 import {LoginService} from "../../../application/service/Login-service";
@@ -10,7 +10,7 @@ import {maxConsecutiveFailsByEmail, maxWrongAttemptsByIPperDay} from "../../../.
 import {limiterSlowBruteByIP} from "../../../../shared/redis/LimiterSlowBruteByIP";
 
 export class LoginController {
-    private router;
+    private router: Router;
     private loginService: LoginService;
 
     constructor() {

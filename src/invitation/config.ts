@@ -1,9 +1,10 @@
 import * as mongo from 'mongodb';
+import { connect } from 'mongoose';
 
 export function initMongo(){
     const client = mongo.MongoClient;
-
-    client.connect('mongodb://mongo:27017/twenti', function (err) {
+    const url = 'mongodb://mongo:27017/twenti';
+    client.connect(url, function (err) {
         if(err) {
             console.log('database is not connected')
         }
@@ -11,4 +12,7 @@ export function initMongo(){
             console.log('connected!!')
         }
     })
+    connect(url).then( () => {
+        console.log('Mongoose connected');
+    });
 }

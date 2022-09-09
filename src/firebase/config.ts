@@ -1,9 +1,12 @@
-import {initializeApp, applicationDefault} from 'firebase-admin/app';
+import {initializeApp} from 'firebase-admin/app';
 import {initializeApp as f} from 'firebase/app';
 
-export function initFirebaseModule(){
+import * as serviceAccount from "../../serviceAccountKey.json";
+import {credential} from "firebase-admin";
+
+export function initFirebaseModule() {
     initializeApp({
-        credential: applicationDefault(),
+        credential: credential.cert(serviceAccount as any),
         projectId: 'auth-twenti',
     })
 

@@ -1,8 +1,8 @@
 import {Types} from "mongoose";
 
 export interface IUser {
-    _id: string;
-    uid: Types.ObjectId;
+    _id: Types.ObjectId;
+    uid: string;
     createDate: Date;
     updateDate: Date;
     availableInvitations: number;
