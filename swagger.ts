@@ -34,7 +34,7 @@ export const swagger = {
         "application/json"
     ],
     "paths": {
-        "/signUp": {
+        "/firebase/signUp": {
             "post": {
                 "tags": [
                     "Firebase"
@@ -65,7 +65,7 @@ export const swagger = {
                 }
             }
         },
-        "/logIn": {
+        "/firebase/logIn": {
             "post": {
                 "tags": [
                     "Firebase"
@@ -96,7 +96,7 @@ export const swagger = {
                 }
             }
         },
-        "/getUser/{uid}": {
+        "/firebase/getUser/{uid}": {
             "get": {
                 "tags": [
                     "Firebase"
@@ -129,7 +129,7 @@ export const swagger = {
                 }
             }
         },
-        "/getUser/byEmail/{email}": {
+        "/firebase/getUser/byEmail/{email}": {
             "get": {
                 "tags": [
                     "Firebase"
@@ -162,7 +162,7 @@ export const swagger = {
                 }
             }
         },
-        "/getUser/byPhoneNumber/{phoneNumber}": {
+        "/firebase/getUser/byPhoneNumber/{phoneNumber}": {
             "get": {
                 "tags": [
                     "Firebase"
@@ -195,7 +195,7 @@ export const swagger = {
                 }
             }
         },
-        "/updateUser/{uid}": {
+        "/firebase/updateUser/{uid}": {
             "put": {
                 "tags": [
                     "Firebase"
@@ -238,7 +238,7 @@ export const swagger = {
                 }
             }
         },
-        "/deleteUser/{uid}": {
+        "/firebase/deleteUser/{uid}": {
             "delete": {
                 "tags": [
                     "Firebase"
