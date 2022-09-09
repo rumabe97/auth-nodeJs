@@ -36,7 +36,7 @@ export class SignupController {
                 message = data.err?.message ?? userData.err?.message;
                 status = 'Failure Request'
             }
-            const resp = statusCode === CODE_OK ? new SignupOutputDto({...data, user:userData}) :
+            const resp = statusCode === CODE_OK ? new SignupOutputDto({...data}) :
                 ResponseService(status, statusCode, message, data.err || userData.err ? null : data);
             return res.status(statusCode).send(resp);
         })
