@@ -3,6 +3,7 @@ import {toDefinition} from "./src/shared/stringUtils/ToDefinition";
 import {SignupOutputDto} from "./src/firebase/adapter/out/dtos/SignupOutputDto";
 import {LogInInputDto} from "./src/firebase/adapter/in/dtos/LogInInputDto";
 import {LoginOutputDto} from "./src/firebase/adapter/out/dtos/LoginOutputDto";
+import {UpdateInputDto} from "./src/firebase/adapter/in/dtos/UpdateInputDto";
 
 export const swagger = {
     "swagger": "2.0",
@@ -224,7 +225,7 @@ export const swagger = {
                         "required": true,
                         "schema": {
                             "type": "object",
-                            "$ref": "#definitions/signupInputDTO"
+                            "$ref": "#definitions/updateInputDto"
                         }
                     }
                 ],
@@ -285,6 +286,10 @@ export const swagger = {
         "loginOutputDTO": {
             "type": "object",
             "properties": toDefinition(new LoginOutputDto())
+        },
+        "updateInputDto": {
+            "type": "object",
+            "properties": toDefinition(new UpdateInputDto())
         }
     },
     "components": {
