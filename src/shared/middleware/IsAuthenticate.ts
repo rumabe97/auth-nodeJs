@@ -17,9 +17,14 @@ export function authenticate(req, res, next) {
     getAuth()
         .verifyIdToken(token)
         .then((decodedToken) => {
-            const uid = decodedToken.uid;
-            //TODO: Add necesary logic
-            next();
+            if (decodedToken.email_verified) next();
+            const resp = ErrResponseService({
+                status: 'Failure Request',
+                statsCode: CODE_UNAUTHORIZED,
+                message: 'Unauthorized request'
+            });
+            return res.status(CODE_UNAUTHORIZED).send(resp);
+            //add block users logic
         })
         .catch((error) => {
             const resp = ErrResponseService({

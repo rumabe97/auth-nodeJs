@@ -20,6 +20,7 @@ export class SignupController extends DefaultController {
 
     public signup(): any {
         return this.router.post("/", async (req, res) => {
+            this.defaultErrData();
             const signupInputDto: SignupInputDto = new SignupInputDto(req.body);
             const data: any = await this.signupService.signup(clean(signupInputDto));
             let userData: any;
