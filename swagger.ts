@@ -4,6 +4,7 @@ import {SignupOutputDto} from "./src/firebase/adapter/out/dtos/SignupOutputDto";
 import {LogInInputDto} from "./src/firebase/adapter/in/dtos/LogInInputDto";
 import {LoginOutputDto} from "./src/firebase/adapter/out/dtos/LoginOutputDto";
 import {UpdateInputDto} from "./src/firebase/adapter/in/dtos/UpdateInputDto";
+import {UserOutputDto} from "./src/user/adapter/out/dtos/UserOutputDto";
 
 export const swagger = {
     "swagger": "2.0",
@@ -22,6 +23,10 @@ export const swagger = {
         {
             "name": "Firebase",
             "description": "Firebase authentication endpoints"
+        },
+        {
+            "name": "User",
+            "description": "User endpoints"
         }
     ],
     "schemes": [
@@ -268,7 +273,40 @@ export const swagger = {
                     }
                 }
             }
-        }
+        },
+        "/user/addInvitation/{uid}": {
+            "patch": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Get user by uid",
+                "produces": [
+                    "application/json"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "uid",
+                        "in": "path",
+                        "description": "User uid",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "schema": {
+                            "$ref": "#definitions/userOutputDTO"
+                        }
+                    }
+                }
+            }
+        },
     },
     "definitions": {
         "signupInputDTO": {
@@ -290,6 +328,10 @@ export const swagger = {
         "updateInputDto": {
             "type": "object",
             "properties": toDefinition(new UpdateInputDto())
+        },
+        "userOutputDTO": {
+            "type": "object",
+            "properties": toDefinition(new UserOutputDto())
         }
     },
     "components": {

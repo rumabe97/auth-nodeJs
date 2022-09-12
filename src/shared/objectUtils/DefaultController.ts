@@ -12,7 +12,7 @@ export class DefaultController {
     protected setErrData(dataErr: any, status: string = 'Failure Request') {
         this.err = {
             status: status,
-            statusCode: dataErr.code,
+            statusCode: dataErr.statusCode,
             message: dataErr.message
         };
     }

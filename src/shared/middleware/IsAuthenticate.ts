@@ -8,7 +8,7 @@ export function authenticate(req, res, next) {
     if (!bearer) {
         const resp = ErrResponseService({
             status: 'Failure Request',
-            statsCode: CODE_UNAUTHORIZED,
+            statusCode: CODE_UNAUTHORIZED,
             message: 'Unauthorized request'
         });
         return res.status(CODE_UNAUTHORIZED).send(resp);
@@ -17,10 +17,13 @@ export function authenticate(req, res, next) {
     getAuth()
         .verifyIdToken(token)
         .then((decodedToken) => {
-            if (decodedToken.email_verified) next();
+            if (decodedToken.email_verified) {
+                next();
+                return;
+            }
             const resp = ErrResponseService({
                 status: 'Failure Request',
-                statsCode: CODE_UNAUTHORIZED,
+                statusCode: CODE_UNAUTHORIZED,
                 message: 'Unauthorized request'
             });
             return res.status(CODE_UNAUTHORIZED).send(resp);

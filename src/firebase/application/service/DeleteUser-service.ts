@@ -14,7 +14,7 @@ export class DeleteUserService implements DeleteUserPort{
                 return 'Successfully deleted user';
             })
             .catch((error) => {
-                return {err: {code: CODE_BAD_REQUEST, message: error}};
+                return {err: {statusCode: CODE_BAD_REQUEST, message: error}};
             });
     }
 

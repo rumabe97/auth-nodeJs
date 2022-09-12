@@ -1,6 +1,6 @@
-import {DefaultClass} from "../../shared/objectUtils/DefaultClass";
+import {DefaultClass} from "../../../../shared/objectUtils/DefaultClass";
 
-export class User extends DefaultClass{
+export class UserOutputDto extends DefaultClass {
     public _id: string = '';
     public uid: string = '';
     public createdAt: Date = null;
@@ -13,4 +13,5 @@ export class User extends DefaultClass{
         super();
         this.setProps(value);
     }
+
 }

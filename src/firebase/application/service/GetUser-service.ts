@@ -14,7 +14,7 @@ export class GetUserService implements GetUserPort {
                 return userRecord;
             })
             .catch((error) => {
-                return {err: {code: CODE_BAD_REQUEST, message: error}};
+                return {err: {statusCode: CODE_BAD_REQUEST, message: error}};
             });
     }
 
@@ -25,7 +25,7 @@ export class GetUserService implements GetUserPort {
                 return userRecord;
             })
             .catch((error) => {
-                return {err: {code: CODE_BAD_REQUEST, message: error}};
+                return {err: {statusCode: CODE_BAD_REQUEST, message: error}};
             });
     }
 
@@ -36,7 +36,7 @@ export class GetUserService implements GetUserPort {
                 return userRecord;
             })
             .catch((error) => {
-                return {err: {code: CODE_BAD_REQUEST, message: error}};
+                return {err: {statusCode: CODE_BAD_REQUEST, message: error}};
             });
     }
 }

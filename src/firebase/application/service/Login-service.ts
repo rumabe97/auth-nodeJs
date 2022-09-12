@@ -16,7 +16,7 @@ export class LoginService implements LoginPort {
                 return resp;
             })
             .catch((error) => {
-                return {err: {code: CODE_BAD_REQUEST, message: error}}
+                return {err: {statusCode: CODE_BAD_REQUEST, message: error}}
             });
     }
 }

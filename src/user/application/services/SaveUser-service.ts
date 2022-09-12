@@ -1,17 +1,17 @@
-import {CreateUserPort} from "../port/CreateUser-port";
+import {SaveUserPort} from "../port/SaveUserPort";
 import {User} from "../../domain/User";
 import {UserModel} from "../../adapter/persistence/UserModel";
 import {clean} from "../../../shared/objectUtils/Clean";
-import {CODE_BAD_REQUEST} from "../../../shared/enums/Errors";
+import {CODE_INTERNAL_SERVER_ERROR} from "../../../shared/enums/Errors";
 
-export class CreateUserService implements CreateUserPort {
-    createUser(user: User) {
+export class SaveUserService implements SaveUserPort {
+    saveUser(user: User) {
         const saveUser = new UserModel(clean(user));
         return saveUser.save()
             .then(r => {
                 return r;
             }).catch((error) => {
-                return {err: {code: CODE_BAD_REQUEST, message: error}}
+                return {err: {statusCode: CODE_INTERNAL_SERVER_ERROR, message: error}}
             });
     }
 }

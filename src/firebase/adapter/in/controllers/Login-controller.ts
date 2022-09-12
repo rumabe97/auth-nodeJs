@@ -53,7 +53,7 @@ export class LoginController extends DefaultController {
                 } else {
                     const retrySecs = Math.round(rlRejected.msBeforeNext / 1000) || 1;
                     res.set('Retry-After', String(retrySecs));
-                    this.setErrData({code: CODE_TOO_MANY_REQUESTS, message: 'User is blocked'}, 'Too Many Requests')
+                    this.setErrData({statusCode: CODE_TOO_MANY_REQUESTS, message: 'User is blocked'}, 'Too Many Requests')
                     const resp = ErrResponseService(this.err);
                     res.status(CODE_TOO_MANY_REQUESTS).send(resp);
                 }

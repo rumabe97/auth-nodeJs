@@ -14,7 +14,7 @@ export class SignupService implements SignupPort {
                 return userRecord;
             })
             .catch((error) => {
-                return {err: {code: CODE_BAD_REQUEST, message: error}}
+                return {err: {statusCode: CODE_BAD_REQUEST, message: error}}
             });
     }
 }

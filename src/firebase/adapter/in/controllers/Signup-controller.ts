@@ -4,18 +4,18 @@ import {CODE_OK} from "../../../../shared/enums/Errors";
 import {clean} from "../../../../shared/objectUtils/Clean";
 import {SignupOutputDto} from "../../out/dtos/SignupOutputDto";
 import {ErrResponseService} from "../../../../shared/errors/ErrorService";
-import {CreateUserService} from "../../../../user/application/services/CreateUser-service";
+import {SaveUserService} from "../../../../user/application/services/SaveUser-service";
 import {User} from "../../../../user/domain/User";
 import {DefaultController} from "../../../../shared/objectUtils/DefaultController";
 
 export class SignupController extends DefaultController {
     private signupService: SignupService;
-    private createUserService: CreateUserService;
+    private createUserService: SaveUserService;
 
     constructor() {
         super();
         this.signupService = new SignupService();
-        this.createUserService = new CreateUserService();
+        this.createUserService = new SaveUserService();
     }
 
     public signup(): any {
@@ -27,7 +27,7 @@ export class SignupController extends DefaultController {
             if (!data.err) {
                 const user: User = new User(data);
                 user.canInvite = data.emailVerified && !data.disabled;
-                userData = await this.createUserService.createUser(user);
+                userData = await this.createUserService.saveUser(user);
             }
             if (data.err || userData.err) this.setErrData(data.err ?? userData.err);
             const resp = this.err.statusCode === CODE_OK ? new SignupOutputDto(data) : ErrResponseService(this.err);
