@@ -1,6 +1,6 @@
 import {RateLimiterRedis} from "rate-limiter-flexible";
 import {redisClient} from "./config";
-import {ResponseService} from "../errors/ErrorService";
+import {ErrResponseService} from "../errors/ErrorService";
 import {CODE_TOO_MANY_REQUESTS} from "../enums/Errors";
 import {maxRequestPerSecond} from "./values";
 
@@ -20,7 +20,11 @@ export const rateLimiterMiddleware = (req, res, next) => {
             next();
         })
         .catch(_ => {
-            const resp = ResponseService('Too Many Requests', CODE_TOO_MANY_REQUESTS, 'Ip is blocked', null);
+            const resp = ErrResponseService({
+                status: 'Too Many Requests',
+                statusCode: CODE_TOO_MANY_REQUESTS,
+                message: 'Ip is blocked'
+            });
             return res.status(CODE_TOO_MANY_REQUESTS).send(resp);
         });
 };

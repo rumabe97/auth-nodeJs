@@ -1,18 +1,11 @@
-import {Getters} from "../../../../shared/lombokJs/Getters";
-import {Setters} from "../../../../shared/lombokJs/Setters";
+import {DefaultClass} from "../../../../shared/objectUtils/DefaultClass";
 
-@Getters()
-@Setters()
-export class LogInInputDto {
+export class LogInInputDto extends DefaultClass {
     public email: string = '';
     private password: string = '';
 
     constructor(value?: any) {
-        const props = Reflect.ownKeys(this);
-        if (!value) return;
-        props.forEach(p => {
-            if (!this.hasOwnProperty(p)) return;
-            if (value[p]) this[p] = value[p];
-        })
+        super();
+        this.setProps(value);
     }
 }

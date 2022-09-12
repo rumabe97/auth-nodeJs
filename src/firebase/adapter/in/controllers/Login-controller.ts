@@ -1,20 +1,19 @@
-import express, {Router} from "express";
 import {CODE_OK, CODE_TOO_MANY_REQUESTS} from "../../../../shared/enums/Errors";
 import {LogInInputDto} from "../dtos/LogInInputDto";
 import {LoginService} from "../../../application/service/Login-service";
-import {ResponseService} from "../../../../shared/errors/ErrorService";
+import {ErrResponseService} from "../../../../shared/errors/ErrorService";
 import {clean} from "../../../../shared/objectUtils/Clean";
 import {LoginOutputDto} from "../../out/dtos/LoginOutputDto";
 import {limiterConsecutiveFailsByEmail} from "../../../../shared/redis/LimiterConsecutiveFailsByEmail";
 import {maxConsecutiveFailsByEmail, maxWrongAttemptsByIPperDay} from "../../../../shared/redis/values";
 import {limiterSlowBruteByIP} from "../../../../shared/redis/LimiterSlowBruteByIP";
+import {DefaultController} from "../../../../shared/objectUtils/DefaultController";
 
-export class LoginController {
-    private router: Router;
+export class LoginController extends DefaultController {
     private loginService: LoginService;
 
     constructor() {
-        this.router = express.Router();
+        super();
         this.loginService = new LoginService();
     }
 
@@ -24,45 +23,54 @@ export class LoginController {
 
     public logIn(): any {
         return this.router.post('/', async (req, res) => {
-            let status = 'Success Request', statusCode = CODE_OK, message = '';
+            this.defaultErrData();
             const logInInputDto = new LogInInputDto(req?.body);
-            const emailApiKey = this.getEmailIPkey(logInInputDto.email,req.ip);
+            const emailApiKey = this.getEmailIPkey(logInInputDto.email, req.ip);
             const [rlRelSlow, rlResEmail] = await Promise.all([
                 limiterSlowBruteByIP.get(emailApiKey),
                 limiterConsecutiveFailsByEmail.get(logInInputDto.email),
             ]);
 
-            if (rlRelSlow?.consumedPoints > maxWrongAttemptsByIPperDay) {
-                const retrySecs = Math.round(rlRelSlow.msBeforeNext / 1000) || 1;
-                res.set('Retry-After', String(retrySecs));
-                const resp = ResponseService('Too Many Requests', CODE_TOO_MANY_REQUESTS, 'User is blocked', null);
-                return res.status(CODE_TOO_MANY_REQUESTS).send(resp);
-            }
-
-            if (rlResEmail?.consumedPoints > maxConsecutiveFailsByEmail || rlRelSlow?.consumedPoints > maxWrongAttemptsByIPperDay) {
-                const retrySecs = Math.round(rlResEmail.msBeforeNext / 1000) || 1;
-                res.set('Retry-After', String(retrySecs));
-                const resp = ResponseService('Too Many Requests', CODE_TOO_MANY_REQUESTS, 'User is blocked', null);
-                return res.status(CODE_TOO_MANY_REQUESTS).send(resp);
-            }
+            if (this.checkLimiter(rlRelSlow, res, maxWrongAttemptsByIPperDay)) return;
+            if (this.checkLimiter(rlResEmail, res, maxConsecutiveFailsByEmail)) return;
 
             const data: any = await this.loginService.login(clean(logInInputDto));
 
-            if (data.err) {
-                statusCode = data.err.code;
-                message = data.err.message;
-                status = 'Failure Request';
-                const promises = [];
-                promises.push(limiterConsecutiveFailsByEmail.consume(logInInputDto.email));
-                promises.push(limiterSlowBruteByIP.consume(emailApiKey));
-                await Promise.all(promises);
+            try {
 
+                if (data.err) {
+                    this.setErrData(data.err);
+                    const promises = [];
+                    promises.push(limiterConsecutiveFailsByEmail.consume(logInInputDto.email));
+                    promises.push(limiterSlowBruteByIP.consume(emailApiKey));
+                    await Promise.all(promises);
+                }
+                if (rlResEmail.consumedPoints > 0 && !data.err) await limiterConsecutiveFailsByEmail.delete(logInInputDto.email);
+                const resp = this.err.statusCode === CODE_OK ? new LoginOutputDto(data.user) : ErrResponseService(this.err);
+                return res.status(this.err.statusCode).send(resp);
+            } catch (rlRejected) {
+                if (rlRejected instanceof Error) {
+                    throw rlRejected;
+                } else {
+                    const retrySecs = Math.round(rlRejected.msBeforeNext / 1000) || 1;
+                    res.set('Retry-After', String(retrySecs));
+                    this.setErrData({code: CODE_TOO_MANY_REQUESTS, message: 'User is blocked'}, 'Too Many Requests')
+                    const resp = ErrResponseService(this.err);
+                    res.status(CODE_TOO_MANY_REQUESTS).send(resp);
+                }
             }
-            if (rlResEmail.consumedPoints > 0 && !data.err) {
-                await limiterConsecutiveFailsByEmail.delete(logInInputDto.email);
-            }
-            const resp = statusCode === CODE_OK ? new LoginOutputDto(data.user) : ResponseService(status, statusCode, message, data.err ? null : data);
-            return res.status(statusCode).send(resp);
         })
+    }
+
+    private checkLimiter(limiter, res, max) {
+        if (limiter?.consumedPoints > max) {
+            const retrySecs = Math.round(limiter.msBeforeNext / 1000) || 1;
+            res.set('Retry-After', String(retrySecs));
+            this.setErrData({code: CODE_TOO_MANY_REQUESTS, message: 'User is blocked'}, 'Too Many Requests')
+            const resp = ErrResponseService(this.err);
+            res.status(CODE_TOO_MANY_REQUESTS).send(resp);
+            return true;
+        }
+        return false;
     }
 }

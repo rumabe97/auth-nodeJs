@@ -1,30 +1,25 @@
-import express, {Router} from "express";
 import {CODE_OK} from "../../../../shared/enums/Errors";
-import {ResponseService} from "../../../../shared/errors/ErrorService";
+import {ErrResponseService} from "../../../../shared/errors/ErrorService";
 import {DeleteUserService} from "../../../application/service/DeleteUser-service";
 import {isOwner} from "../../../../shared/middleware/IsOwner";
+import {DefaultController} from "../../../../shared/objectUtils/DefaultController";
 
-export class DeleteUserController {
-    private router: Router;
+export class DeleteUserController extends DefaultController {
     private deleteUserService: DeleteUserService;
 
     constructor() {
-        this.router = express.Router();
+        super();
         this.deleteUserService = new DeleteUserService();
     }
 
-    public deleteUser(){
+    public deleteUser() {
         return this.router.delete('/:uid', isOwner, async (req, res) => {
-            let status = 'Success Request', statusCode = CODE_OK, message = '';
+            this.defaultErrData();
             const data: any = await this.deleteUserService.deleteUser(req.params.uid);
 
-            if (data.err) {
-                statusCode = data.err.code;
-                message = data.err.message;
-                status = 'Failure Request'
-            }
-            const resp = statusCode === CODE_OK ? data : ResponseService(status, statusCode, message, data.err ? null : data);
-            return res.status(statusCode).send(resp);
+            if (data.err) this.setErrData(data.err);
+            const resp = this.err.statusCode === CODE_OK ? data : ErrResponseService(this.err);
+            return res.status(this.err.statusCode).send(resp);
         });
     }
 }

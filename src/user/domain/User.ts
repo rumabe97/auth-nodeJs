@@ -1,5 +1,6 @@
+import {DefaultClass} from "../../shared/objectUtils/DefaultClass";
 
-export class User {
+export class User extends DefaultClass{
     public _id: string;
     private uid: string = '';
     public createDate: Date = null;
@@ -9,11 +10,7 @@ export class User {
     public canInvite: boolean = false;
 
     constructor(value?: any) {
-        const props = Reflect.ownKeys(this);
-        if (!value) return;
-        props.forEach(p => {
-            if (!this.hasOwnProperty(p)) return;
-            if (value[p]) this[p] = value[p];
-        })
+        super();
+        this.setProps(value);
     }
 }

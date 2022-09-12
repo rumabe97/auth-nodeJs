@@ -1,14 +1,14 @@
-import {Getters} from "../../../../shared/lombokJs/Getters";
-import {Setters} from "../../../../shared/lombokJs/Setters";
-import {AllArgsConstruct} from "../../../../shared/lombokJs/AllArgsConstruc";
+import {DefaultClass} from "../../../../shared/objectUtils/DefaultClass";
 
-@Getters()
-@Setters()
-@AllArgsConstruct()
-export class ProviderData {
+export class ProviderData extends DefaultClass {
     private uid: string = '';
     private providerIn: string = '';
     private phoneNumber: string = '';
     private displayName: string = '';
     private photoURL: string = '';
+
+    constructor(value?: any) {
+        super();
+        this.setProps(value);
+    }
 }
