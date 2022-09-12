@@ -37,7 +37,6 @@ export class LoginController extends DefaultController {
             const data: any = await this.loginService.login(clean(logInInputDto));
 
             try {
-
                 if (data.err) {
                     this.setErrData(data.err);
                     const promises = [];

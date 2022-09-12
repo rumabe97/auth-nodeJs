@@ -28,3 +28,11 @@ app.use('/api/v0/auth', swaggerUi.serve, swaggerUi.setup(swagger, null, null, nu
 app.listen(PORT, () => {
     console.log(`Server is running on PORT ${PORT}`)
 })
+
+process.on('uncaughtException', err =>{
+    console.log('Caught exception ', err);
+})
+
+process.on('unhandledRejection', (reason, promise) => {
+    console.log(`Unhandled rejection at ${promise} reason: ${reason}`)
+})
