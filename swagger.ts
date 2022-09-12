@@ -279,7 +279,7 @@ export const swagger = {
                 "tags": [
                     "User"
                 ],
-                "summary": "Get user by uid",
+                "summary": "Add invitation to user",
                 "produces": [
                     "application/json"
                 ],
@@ -372,7 +372,40 @@ export const swagger = {
                     }
                 }
             }
-        }
+        },
+        "/user/removeInvitation/{uid}": {
+            "patch": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Remove invitation to user",
+                "produces": [
+                    "application/json"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "uid",
+                        "in": "path",
+                        "description": "User uid",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "schema": {
+                            "$ref": "#definitions/userOutputDTO"
+                        }
+                    }
+                }
+            }
+        },
     },
     "definitions": {
         "signupInputDTO": {
