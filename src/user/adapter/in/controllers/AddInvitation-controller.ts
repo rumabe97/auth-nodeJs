@@ -32,7 +32,7 @@ export class AddInvitationController extends DefaultController {
 
             if (user.availableInvitations >= 10) {
                 const resp = ErrResponseService({
-                    status:'Failure Request',
+                    status: 'Failure Request',
                     statusCode: CODE_BAD_REQUEST,
                     message: 'Maximum number of invitations reached'
                 });
@@ -41,7 +41,10 @@ export class AddInvitationController extends DefaultController {
             user.availableInvitations++;
             const data = await this.updateUserService.updateUser(user) as any;
             if (data.err) this.setErrData(data.err);
-            const resp = this.err.statusCode === CODE_OK ? new UserOutputDto(data) : ErrResponseService(this.err);
+            const resp = this.err.statusCode === CODE_OK ? new UserOutputDto({
+                ...data,
+                availableInvitations: data.availableInvitations + 1
+            }) : ErrResponseService(this.err);
             return res.status(this.err.statusCode).send(resp);
         });
     }
