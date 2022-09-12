@@ -307,6 +307,72 @@ export const swagger = {
                 }
             }
         },
+        "/user/getUser/byUid/{uid}": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Get user by uid",
+                "produces": [
+                    "application/json"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "uid",
+                        "in": "path",
+                        "description": "User uid",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "schema": {
+                            "$ref": "#definitions/userOutputDTO"
+                        }
+                    }
+                }
+            }
+        },
+        "/user/getUser/{id}": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Get user by id",
+                "produces": [
+                    "application/json"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "User id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "schema": {
+                            "$ref": "#definitions/userOutputDTO"
+                        }
+                    }
+                }
+            }
+        }
     },
     "definitions": {
         "signupInputDTO": {
