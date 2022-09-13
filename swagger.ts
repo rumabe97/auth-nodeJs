@@ -406,6 +406,49 @@ export const swagger = {
                 }
             }
         },
+        "/user/updateCanInvite/{uid}": {
+            "patch": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Update can invite value",
+                "produces": [
+                    "application/json"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "uid",
+                        "in": "path",
+                        "description": "User uid",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Update user body",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "$ref": "#definitions/canInvite"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "schema": {
+                            "$ref": "#definitions/userOutputDTO"
+                        }
+                    }
+                }
+            }
+        }
     },
     "definitions": {
         "signupInputDTO": {
@@ -431,6 +474,14 @@ export const swagger = {
         "userOutputDTO": {
             "type": "object",
             "properties": toDefinition(new UserOutputDto())
+        },
+        "canInvite":{
+            "required": ["canInvite"],
+            "properties": {
+                "canInvite": {
+                    "type": "boolean"
+                },
+            }
         }
     },
     "components": {

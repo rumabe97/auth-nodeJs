@@ -35,7 +35,7 @@ export class RemoveInvitationController extends DefaultController {
                     statusCode: CODE_BAD_REQUEST,
                     message: 'Minimum number of invitations reached'
                 });
-                return res.status(this.err.statusCode).send(resp);
+                return res.status(CODE_BAD_REQUEST).send(resp);
             }
             user.availableInvitations--;
             const data = await this.updateUserService.updateUser(user) as any;
