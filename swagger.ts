@@ -101,6 +101,33 @@ export const swagger = {
                     }
                 }
             }
+        }, "/firebase/refreshToken/{refreshToken}": {
+            "get": {
+                "tags": [
+                    "Firebase"
+                ],
+                "summary": "Refresh user token",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "refreshToken",
+                        "in": "path",
+                        "description": "RefreshToken",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "schema": {
+                            "$ref": "#definitions/signupOutputDTO"
+                        }
+                    }
+                }
+            }
         },
         "/firebase/getUser/{uid}": {
             "get": {
@@ -475,7 +502,7 @@ export const swagger = {
             "type": "object",
             "properties": toDefinition(new UserOutputDto())
         },
-        "canInvite":{
+        "canInvite": {
             "required": ["canInvite"],
             "properties": {
                 "canInvite": {
