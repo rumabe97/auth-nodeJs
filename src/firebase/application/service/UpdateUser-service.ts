@@ -13,7 +13,7 @@ export class UpdateUserService implements UpdateUserPort {
                 return userRecord;
             })
             .catch((error) => {
-                return {err: {statusCode: CODE_BAD_REQUEST, message: error}}
+                return {err: {statusCode: CODE_BAD_REQUEST, message: error}};
             });
     }
 
