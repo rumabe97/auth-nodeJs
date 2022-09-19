@@ -1,17 +1,20 @@
 version: '3'
 services:
   redis:
+    container_name: redis
     image: redis
     networks:
       - twenti
   mongo:
+    container_name: mongo
     image: mongo
     ports:
       - "27017:27017"
     networks:
       - twenti
   twenti-auth:
-    container_name: 'twenti-auth'
+    container_name: twenti-auth
+    image: twenti-auth
     build:
       context: ""
       dockerfile: ./Dockerfile
