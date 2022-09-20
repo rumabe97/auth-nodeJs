@@ -11,7 +11,7 @@ export function initEureka(appName: string, port: number) {
                 '$': port,
                 '@enabled': 'true',
             },
-            healthCheckUrl: 'http://twenti-auth:8080/health',
+            healthCheckUrl: 'http://twenti-auth:3000/health',
             vipAddress: appName,
             dataCenterInfo: {
                 '@class': 'com.netflix.appinfo.InstanceInfo$DefaultDataCenterInfo',

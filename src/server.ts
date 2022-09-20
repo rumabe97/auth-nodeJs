@@ -39,7 +39,7 @@ app.listen(PORT, () => {
     console.log(`Server is running on PORT ${PORT}`)
 })
 
-initEureka('twenti-auth', 8080);
+initEureka('twenti-auth', 3000);
 
 process.on('uncaughtException', err => {
     console.log('Caught exception ', err);
