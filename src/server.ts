@@ -3,14 +3,14 @@ import {firebaseRoutes} from "./firebase/routes";
 import bodyParser from "body-parser";
 import swaggerUi from "swagger-ui-express";
 import {swagger} from "../swagger";
-import {initFirebaseModule} from "./configs/ConfigFirebase";
+import {initFirebaseModule} from "./config/ConfigFirebase";
 import {invitationsRoutes} from "./invitation/routes";
-import {initMongo} from "./configs/ConfigMongo";
+import {initMongo} from "./config/ConfigMongo";
 import {userRoutes} from "./user/routes";
-import {initEureka} from "./configs/EurekaConfig";
+import {initEureka} from "./config/EurekaConfig";
 import actuator, {Options} from "express-actuator";
 import {rateLimiterMiddleware} from "./shared/redis/RateLimiterRedis";
-import {initConfig} from "./configs/ConfigServer";
+import {initConfig} from "./config/ConfigServer";
 
 const app = express();
 initConfig().then(config => {
