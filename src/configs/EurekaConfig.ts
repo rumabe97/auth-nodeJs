@@ -24,6 +24,7 @@ export function initEureka(appName: string, port: number) {
             servicePath: '/eureka/apps',
             maxRetries: 10,
             requestRetryDelay: 2000,
+            fetchMetadata: false
         },
     });
 

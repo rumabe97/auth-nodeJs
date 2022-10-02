@@ -1,18 +1,17 @@
 import * as mongo from 'mongodb';
-import { connect } from 'mongoose';
+import {connect} from 'mongoose';
 
-export function initMongo(){
+export function initMongo(url: string) {
     const client = mongo.MongoClient;
-    const url = 'mongodb://mongo:27017/twenti';
+
     client.connect(url, function (err) {
-        if(err) {
+        if (err) {
             console.log('database is not connected')
-        }
-        else {
+        } else {
             console.log('connected!!')
         }
     })
-    connect(url).then( () => {
+    connect(url).then(() => {
         console.log('Mongoose connected');
     });
 }
