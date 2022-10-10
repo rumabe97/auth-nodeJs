@@ -20,10 +20,10 @@ initConfig().then(config => {
     app.use(bodyParser.json({limit: '50mb'}));
     const PORT = config.get('server.port');
 
-    if (config.get('redis.enable')) app.use(rateLimiterMiddleware);
+    // if (config.get('redis.enable')) app.use(rateLimiterMiddleware);
     initFirebaseModule(config.get('firebase.project.id'), config.get('firebase.apiKey'));
     initMongo(config.get('mongo.url'));
-    initEureka('twenti-auth', PORT);
+    initEureka(config.get('spring.application.name'), PORT);
 
     const options: Options = {
         basePath: '',

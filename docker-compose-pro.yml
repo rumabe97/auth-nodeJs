@@ -1,6 +1,6 @@
 version: '3'
 services:
-  twenti-auth:
+  service:
     container_name: auth
     image: auth
     build:

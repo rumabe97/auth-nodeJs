@@ -11,7 +11,7 @@ export function initEureka(appName: string, port: number) {
                 '$': port,
                 '@enabled': 'true',
             },
-            healthCheckUrl: 'http://twenti-auth:3000/health',
+            healthCheckUrl: 'http://auth:3000/health',
             vipAddress: appName,
             dataCenterInfo: {
                 '@class': 'com.netflix.appinfo.InstanceInfo$DefaultDataCenterInfo',
@@ -31,7 +31,7 @@ export function initEureka(appName: string, port: number) {
     client.logger.level('debug')
 
     client.start(error => {
-        console.log(error || "user service registered")
+        console.log(error || "auth service registered")
     });
 
     function exitHandler(options, exitCode) {
