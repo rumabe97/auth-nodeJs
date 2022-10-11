@@ -1,6 +1,6 @@
 version: '3'
 services:
-  service:
+  mongo:
     container_name: mongo
     image: mongo
     ports:
